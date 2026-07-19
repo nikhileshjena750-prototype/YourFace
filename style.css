@@ -253,8 +253,12 @@ body::after {
   transform-origin: 50% 50%;
 }
 
-.heart-bg path {
-  fill: url(#heartGradient);
+#successModal .heart-bg path {
+  fill: url(#successHeartGradient);
+}
+
+#errorModal .heart-bg path {
+  fill: url(#errorHeartGradient);
 }
 
 .heart-message {
@@ -1450,6 +1454,29 @@ Short landscape screens need slightly more compact controls.
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+
+  .main-heart,
+  .hold-heart,
+  .declaration-heart,
+  .final-heading-heart,
+  .heart-bg,
+  .floating-heart,
+  .nav-arrow.navigation-invitation,
+  .love-envelope.envelope-invitation .envelope-seal {
+    animation: none !important;
+  }
+
+  .photo-card img,
+  .envelope-shell,
+  .envelope-letter,
+  .envelope-flap,
+  .special-note-paper,
+  .music-player {
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /*====================================================
 CUSTOM HEART CURSOR
 Version: 1.0
@@ -1898,14 +1925,8 @@ Lightbox safe areas and dynamic viewport sizing.
   max-width: min(96vw, 1280px);
 
   max-height:
-    min(
-      90vh,
-      calc(
-        100dvh -
-        max(36px, env(safe-area-inset-top)) -
-        max(36px, env(safe-area-inset-bottom))
-      )
-    );
+    min(90vh,
+      calc(100dvh - max(36px, env(safe-area-inset-top)) - max(36px, env(safe-area-inset-bottom))));
 }
 
 .lightbox-close {
@@ -1934,11 +1955,7 @@ Allow the music progress bar to shrink inside narrow flex layouts.
 */
 .music-player {
   max-width:
-    calc(
-      100vw -
-      max(28px, env(safe-area-inset-left)) -
-      max(28px, env(safe-area-inset-right))
-    );
+    calc(100vw - max(28px, env(safe-area-inset-left)) - max(28px, env(safe-area-inset-right)));
 }
 
 .music-player button {
@@ -2161,11 +2178,7 @@ SHORT LANDSCAPE VIEWPORTS
 
   .lightbox img {
     max-height:
-      calc(
-        100dvh -
-        max(24px, env(safe-area-inset-top)) -
-        max(24px, env(safe-area-inset-bottom))
-      );
+      calc(100dvh - max(24px, env(safe-area-inset-top)) - max(24px, env(safe-area-inset-bottom)));
   }
 }
 
@@ -2173,10 +2186,7 @@ SHORT LANDSCAPE VIEWPORTS
 TABLET LANDSCAPE
 ====================================================*/
 
-@media
-  (min-width: 768px) and
-  (max-width: 1400px) and
-  (orientation: landscape) {
+@media (min-width: 768px) and (max-width: 1400px) and (orientation: landscape) {
 
   .main-content-shell {
     width: min(1120px, 94vw);
@@ -2188,5 +2198,125 @@ TABLET LANDSCAPE
 
   .photo-grid {
     gap: clamp(20px, 2.6vw, 32px);
+  }
+}
+
+/*====================================================
+FINAL QA — ACCESSIBILITY FOCUS
+Pass 6A
+====================================================*/
+
+.enter-btn:focus-visible,
+.close-error:focus-visible,
+.hold-button:focus-visible,
+.photo-card:focus-visible,
+.special-note-close:focus-visible,
+.music-player button:focus-visible,
+#musicProgress:focus-visible,
+.lightbox-close:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(255, 95, 158, 0.22),
+    0 0 0 7px rgba(255, 250, 252, 0.14),
+    0 16px 38px rgba(0, 0, 0, 0.35);
+}
+
+.field-group input:focus-visible {
+  outline: none;
+}
+
+.photo-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(255, 213, 229, 0.72);
+}
+
+.special-note-close:focus-visible,
+.lightbox-close:focus-visible,
+.music-player button:focus-visible {
+  border-color: rgba(255, 240, 246, 0.82);
+}
+
+/*
+Prevent hover transformations from sticking on touchscreens.
+*/
+@media (hover: none),
+(pointer: coarse) {
+
+  .enter-btn:hover,
+  .photo-card:hover,
+  .nav-arrow:hover,
+  .next-chapter:hover,
+  .previous-chapter:hover,
+  .music-player button:hover {
+    transform: none;
+  }
+}
+
+
+/*====================================================
+MEDIA RESILIENCE
+Pass 6B
+====================================================*/
+
+.photo-card {
+  isolation: isolate;
+}
+
+.photo-card::before {
+  content: "♡";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  display: grid;
+  place-items: center;
+
+  color: rgba(255, 213, 229, 0.34);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+
+  background:
+    radial-gradient(circle,
+      rgba(255, 95, 158, 0.12),
+      rgba(255, 255, 255, 0.025));
+}
+
+.photo-card.image-loaded::before {
+  opacity: 0;
+}
+
+.photo-card.image-load-error {
+  min-height: 240px;
+  cursor: default;
+}
+
+.photo-card.image-load-error img {
+  display: none;
+}
+
+.photo-card.image-load-error::before {
+  content: "Picture unavailable ♡";
+  z-index: 1;
+
+  padding: 24px;
+
+  color: var(--rose-light);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.main-experience {
+  scrollbar-gutter: stable;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+
+  .login-card,
+  .modal,
+  .music-player {
+    background-color: rgba(39, 4, 20, 0.94);
   }
 }

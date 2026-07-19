@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Enter His Heart</title>
-  <link rel="stylesheet" href="style.css?v=18">
+  <link rel="stylesheet" href="style.css?v=20">
 
   <style id="chapter-photo-layout-fix">
     /* EYES: photo 1 first, photo 2 directly below, both centered */
@@ -691,7 +691,7 @@ Closing reverses the movement before the flap and seal return.
       <div class="heart-stage">
         <svg class="heart-bg" viewBox="0 0 512 460" aria-hidden="true" focusable="false">
           <defs>
-            <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="successHeartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#ff96bf" />
               <stop offset="52%" stop-color="#f44c8d" />
               <stop offset="100%" stop-color="#bd0f4e" />
@@ -731,7 +731,7 @@ Closing reverses the movement before the flap and seal return.
       <div class="heart-stage">
         <svg class="heart-bg" viewBox="0 0 512 460" aria-hidden="true" focusable="false">
           <defs>
-            <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="errorHeartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#ff96bf" />
               <stop offset="52%" stop-color="#f44c8d" />
               <stop offset="100%" stop-color="#bd0f4e" />
@@ -763,11 +763,11 @@ Closing reverses the movement before the flap and seal return.
 
         <div class="photo-grid">
           <button class="photo-card" type="button" aria-label="Open first picture in full screen">
-            <img src="images/opening-1.jpg" alt="" />
+            <img src="images/opening-1.jpg" alt="" decoding="async" fetchpriority="high" />
           </button>
 
           <button class="photo-card" type="button" aria-label="Open second picture in full screen">
-            <img src="images/opening-2.jpg" alt="" />
+            <img src="images/opening-2.jpg" alt="" decoding="async" fetchpriority="high" />
           </button>
         </div>
 
@@ -782,11 +782,11 @@ Closing reverses the movement before the flap and seal return.
 
         <div class="photo-grid chapter-photo-grid">
           <button class="photo-card" type="button" aria-label="Open FACE first picture in full screen">
-            <img src="images/face-1.jpg" alt="" />
+            <img src="images/face-1.jpg" alt="" loading="lazy" decoding="async" />
           </button>
 
           <button class="photo-card" type="button" aria-label="Open FACE second picture in full screen">
-            <img src="images/face-2.jpg" alt="" />
+            <img src="images/face-2.jpg" alt="" loading="lazy" decoding="async" />
           </button>
         </div>
 
@@ -827,12 +827,12 @@ Closing reverses the movement before the flap and seal return.
         <div class="photo-grid chapter-photo-grid eyes-photo-grid">
           <button class="photo-card eyes-photo-card eyes-photo-primary" type="button"
             aria-label="Open EYES first picture in full screen">
-            <img src="images/eyes-1.jpg" alt="" />
+            <img src="images/eyes-1.jpg" alt="" loading="lazy" decoding="async" />
           </button>
 
           <button class="photo-card eyes-photo-card eyes-photo-secondary" type="button"
             aria-label="Open EYES second picture in full screen">
-            <img src="images/eyes-2.jpg" alt="" />
+            <img src="images/eyes-2.jpg" alt="" loading="lazy" decoding="async" />
           </button>
         </div>
 
@@ -867,7 +867,7 @@ Closing reverses the movement before the flap and seal return.
         <div class="photo-grid chapter-photo-grid single-photo-grid nose-photo-grid">
           <button class="photo-card single-photo-card nose-photo-card" type="button"
             aria-label="Open NOSE picture in full screen">
-            <img src="images/nose-1.jpg" alt="" />
+            <img src="images/nose-1.jpg" alt="" loading="lazy" decoding="async" />
           </button>
         </div>
 
@@ -893,7 +893,7 @@ Closing reverses the movement before the flap and seal return.
         <div class="photo-grid chapter-photo-grid single-photo-grid lips-photo-grid">
           <button class="photo-card single-photo-card lips-photo-card" type="button"
             aria-label="Open LIPS picture in full screen">
-            <img src="images/lips-1.jpg" alt="" />
+            <img src="images/lips-1.jpg" alt="" loading="lazy" decoding="async" />
           </button>
         </div>
 
@@ -933,7 +933,7 @@ Closing reverses the movement before the flap and seal return.
         <div class="photo-grid chapter-photo-grid single-photo-grid smile-photo-grid">
           <button class="photo-card single-photo-card smile-photo-card" type="button"
             aria-label="Open SMILE picture in full screen">
-            <img src="images/smile-1.jpg" alt="" />
+            <img src="images/smile-1.jpg" alt="" loading="lazy" decoding="async" />
           </button>
         </div>
 
@@ -965,7 +965,7 @@ Closing reverses the movement before the flap and seal return.
         <div class="photo-grid chapter-photo-grid single-photo-grid teeth-photo-grid">
           <button class="photo-card single-photo-card teeth-photo-card" type="button"
             aria-label="Open TEETH picture in full screen">
-            <img src="images/teeth-1.jpg" alt="" />
+            <img src="images/teeth-1.jpg" alt="" loading="lazy" decoding="async" />
           </button>
         </div>
 
@@ -1052,7 +1052,7 @@ Closing reverses the movement before the flap and seal return.
         <div class="photo-grid chapter-photo-grid single-photo-grid final-photo-grid">
           <button class="photo-card single-photo-card final-photo-card" type="button"
             aria-label="Open final picture in full screen">
-            <img src="images/final-1.jpg" alt="" />
+            <img src="images/final-1.jpg" alt="" loading="lazy" decoding="async" />
           </button>
         </div>
 
@@ -1090,11 +1090,11 @@ Closing reverses the movement before the flap and seal return.
      MUSIC PLAYER
 ========================= -->
 
-  <audio id="bgMusic" preload="auto">
+  <audio id="bgMusic" preload="metadata">
     <source src="audio/kya-crook.mp3" type="audio/mpeg">
   </audio>
 
-  <div id="musicPlayer" class="music-player">
+  <div id="musicPlayer" class="music-player" role="group" aria-label="Background music controls">
 
     <button id="restartMusic" title="Restart">
       ↻
@@ -1104,11 +1104,11 @@ Closing reverses the movement before the flap and seal return.
       ⏯
     </button>
 
-    <input type="range" id="musicProgress" min="0" max="100" value="0">
+    <input type="range" id="musicProgress" min="0" max="100" value="0" aria-label="Music progress" />
 
   </div>
 
-  <script src="script.js?v=17"></script>
+  <script src="script.js?v=21"></script>
 
 </body>
 
