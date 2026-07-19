@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enter His Heart</title>
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=17">
 
   <style id="chapter-photo-layout-fix">
     /* EYES: photo 1 first, photo 2 directly below, both centered */
@@ -236,13 +236,41 @@
       display: block;
       width: min(320px, 82vw);
       aspect-ratio: 1.42 / 1;
+
       filter:
         drop-shadow(0 20px 35px rgba(0, 0, 0, 0.34)) drop-shadow(0 0 24px rgba(255, 95, 158, 0.2));
-      transition: transform 0.35s ease;
+
+      transform:
+        translateY(0) scale(1);
+
+      transform-style: preserve-3d;
+
+      transition:
+        transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.42s ease,
+        opacity 0.42s ease;
     }
 
-    .love-envelope:hover .envelope-shell {
-      transform: translateY(-5px) scale(1.025);
+    @media (hover: hover) and (pointer: fine) {
+      .love-envelope:hover .envelope-shell {
+        transform:
+          translateY(-7px) scale(1.03);
+
+        filter:
+          drop-shadow(0 26px 42px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 34px rgba(255, 95, 158, 0.32));
+      }
+    }
+
+    .love-envelope:focus-visible {
+      outline: none;
+    }
+
+    .love-envelope:focus-visible .envelope-shell {
+      transform:
+        translateY(-5px) scale(1.025);
+
+      filter:
+        drop-shadow(0 25px 42px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 35px rgba(255, 95, 158, 0.38));
     }
 
     .envelope-back,
@@ -266,12 +294,39 @@
       bottom: 15%;
       width: 84%;
       height: 66%;
+
       display: grid;
       place-items: center;
+
       border-radius: 14px 14px 8px 8px;
-      background: linear-gradient(180deg, #fffafc, #ffeaf2);
-      transform: translateY(18%);
-      transition: transform 0.65s cubic-bezier(.2, .8, .2, 1);
+
+      background:
+        linear-gradient(115deg,
+          rgba(255, 255, 255, 0.42),
+          transparent 28%),
+        linear-gradient(180deg,
+          #fffdfd,
+          #ffeaf2);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.72);
+
+      box-shadow:
+        0 8px 20px rgba(89, 8, 39, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+      transform:
+        translateY(18%) scale(0.985);
+
+      opacity: 0.94;
+
+      transition:
+        transform 0.82s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.42s ease,
+        box-shadow 0.42s ease;
+
+      transition-delay: 0s;
+
       z-index: 1;
     }
 
@@ -291,14 +346,30 @@
     .envelope-flap {
       top: 14%;
       height: 55%;
+
       transform-origin: 50% 0;
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      background: linear-gradient(160deg, #ffc1d6, #e66999);
+      transform: rotateX(0deg);
+
+      clip-path:
+        polygon(0 0, 100% 0, 50% 100%);
+
+      background:
+        linear-gradient(160deg,
+          #ffc8dc,
+          #e66999);
+
       border-radius: 20px 20px 0 0;
+
+      backface-visibility: hidden;
+
       z-index: 4;
+
       transition:
-        transform 0.65s cubic-bezier(.2, .8, .2, 1),
-        z-index 0s linear 0.32s;
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.42s ease;
+
+      filter:
+        drop-shadow(0 7px 8px rgba(92, 7, 39, 0.12));
     }
 
     .envelope-seal {
@@ -318,18 +389,104 @@
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .love-envelope.is-open .envelope-flap {
-      transform: rotateX(180deg);
-      z-index: 0;
+    /*
+A single, quiet invitation after the final chapter settles.
+*/
+    .love-envelope.envelope-invitation .envelope-seal {
+      animation:
+        envelopeSealInvitation 1.15s cubic-bezier(0.22, 1, 0.36, 1) 1;
     }
 
-    .love-envelope.is-open .envelope-letter {
-      transform: translateY(-34%);
+    @keyframes envelopeSealInvitation {
+
+      0%,
+      100% {
+        transform:
+          translate(-50%, -50%) scale(1);
+
+        box-shadow:
+          0 7px 18px rgba(83, 0, 31, 0.35);
+      }
+
+      38% {
+        transform:
+          translate(-50%, -50%) scale(1.13);
+
+        box-shadow:
+          0 7px 18px rgba(83, 0, 31, 0.35),
+          0 0 24px rgba(255, 95, 158, 0.65);
+      }
+
+      68% {
+        transform:
+          translate(-50%, -50%) scale(0.96);
+      }
     }
 
+    /*
+Stage 1: the seal gently disappears and the flap folds back.
+*/
+    .love-envelope.is-opening .envelope-seal,
     .love-envelope.is-open .envelope-seal {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.65);
+
+      transform:
+        translate(-50%, -50%) scale(0.62);
+    }
+
+    .love-envelope.is-opening .envelope-flap,
+    .love-envelope.is-open .envelope-flap {
+      transform:
+        rotateX(178deg);
+
+      filter:
+        drop-shadow(0 -5px 9px rgba(92, 7, 39, 0.12));
+    }
+
+    /*
+Stage 2: the letter rises after the flap has started opening.
+*/
+    .love-envelope.is-open .envelope-letter {
+      transform:
+        translateY(-42%) scale(1);
+
+      opacity: 1;
+
+      box-shadow:
+        0 18px 32px rgba(89, 8, 39, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+      transition-delay: 0.18s;
+    }
+
+    /*
+Once open, the envelope itself becomes quieter so the note receives focus.
+*/
+    .love-envelope.is-open .envelope-shell {
+      transform:
+        translateY(-2px) scale(0.99);
+
+      filter:
+        drop-shadow(0 18px 30px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 18px rgba(255, 95, 158, 0.14));
+
+      opacity: 0.88;
+    }
+
+    /*
+Closing reverses the movement before the flap and seal return.
+*/
+    .love-envelope.is-closing .envelope-letter {
+      transform:
+        translateY(18%) scale(0.985);
+
+      opacity: 0.94;
+
+      transition-delay: 0s;
+    }
+
+    .love-envelope.is-closing .envelope-flap {
+      transform:
+        rotateX(178deg);
     }
 
     .special-note-label {
@@ -366,7 +523,28 @@
       padding: clamp(34px, 6vw, 62px) clamp(22px, 5vw, 56px);
       border-radius: 24px;
       color: #4c1830;
-      background: linear-gradient(180deg, #fffafc, #ffeaf2);
+      background:
+        linear-gradient(115deg,
+          rgba(255, 255, 255, 0.52),
+          transparent 30%),
+        repeating-linear-gradient(0deg,
+          rgba(143, 23, 70, 0.018) 0,
+          rgba(143, 23, 70, 0.018) 1px,
+          transparent 1px,
+          transparent 5px),
+        linear-gradient(180deg,
+          #fffdfd,
+          #ffeef4);
+
+      transform:
+        translateY(18px) scale(0.985);
+
+      opacity: 0;
+
+      transition:
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.48s ease,
+        box-shadow 0.42s ease;
       border: 1px solid rgba(255, 255, 255, 0.65);
       box-shadow:
         0 24px 65px rgba(0, 0, 0, 0.38),
@@ -375,6 +553,16 @@
       line-height: 1.8;
       text-align: left;
     }
+
+    .special-note-content.show .special-note-paper {
+  transform:
+    translateY(0)
+    scale(1);
+
+  opacity: 1;
+
+  transition-delay: 0.16s;
+}
 
     .special-note-paper p {
       margin: 0;
@@ -623,7 +811,8 @@
             i want to see everyday near me, after i wake and throughout my life ❤️. As i have already experienced it
             many times its a feeling i always wish for. Also whenever i look at you while you are Asleep- If the word
             <strong>INNOCENCE</strong> was <strong>HUMAN</strong> that will definitely be your face at that time 🥹. You
-            are even more <strong>CUTER</strong> while ur asleep a literal <strong>KITTY KITTY CAT</strong> 😺</p>
+            are even more <strong>CUTER</strong> while ur asleep a literal <strong>KITTY KITTY CAT</strong> 😺
+          </p>
         </div>
 
         <nav class="chapter-nav" aria-label="Chapter navigation">
@@ -662,7 +851,8 @@
           </p>
 
           <p>I know no Vulgar words but Damm girl those <strong>EYES</strong> have <strong>SEDUCED</strong> me
-            <strong>MANY MANY TIMES</strong> 🥵</p>
+            <strong>MANY MANY TIMES</strong> 🥵
+          </p>
         </div>
 
         <nav class="chapter-nav" aria-label="Chapter navigation">
@@ -720,13 +910,15 @@
 
           <p><strong>GIVEN THE FACT THAT YOU ARE THE GODDESS OF SEXINESS</strong> and <strong>THE APSARA</strong>,
             <strong>KISSING</strong> your <strong>LIPS</strong> have been a <strong>HEAVENLY EXPERIENCE</strong> of my
-            <strong>LIFE</strong> 😍💖</p>
+            <strong>LIFE</strong> 😍💖
+          </p>
 
           <p>I mean they are already 11/10 but with those Red lipstick added to them there is <strong>NO SCALE</strong>
             which i can use to Rate Your Perfectly Shaped Soft <strong>RED LIPS</strong> 💋.</p>
 
           <p>You are just <strong>OUT OF THE WORLD</strong> and from the <strong>HEAVENS</strong> after that for
-            <strong>ME</strong> ❤️</p>
+            <strong>ME</strong> ❤️
+          </p>
         </div>
 
         <nav class="chapter-nav" aria-label="Chapter navigation">
@@ -748,7 +940,8 @@
 
         <div class="chapter-copy">
           <p>Its not just your <strong>LIPS</strong> your <strong>SMILE</strong> is something else as well, its like a
-            <strong>RADIATION</strong> of <strong>HAPPINESS UNSTOPPABLE</strong> 💖</p>
+            <strong>RADIATION</strong> of <strong>HAPPINESS UNSTOPPABLE</strong> 💖
+          </p>
 
           <p>Being <strong>CUTE</strong> and with that <strong>SMILE</strong>, <strong>MY HEARTS SKIPS A BEAT WHEN I SEE
               YOU</strong> 💖<br>
@@ -810,7 +1003,8 @@
             And i would also like to add one thing, that if you keep <strong>LOOKING</strong> at me
             <strong>CONSTANTLY</strong> and give me a <strong>SMILE</strong> and <strong>ASK</strong> something
             <strong>OUT</strong> of me, let me tell you something, <strong>HONESTLY</strong> you can make me do
-            <strong>ANYTHING</strong>, <strong>LITERALLY ANYTHING</strong> 😅 ❤️</p>
+            <strong>ANYTHING</strong>, <strong>LITERALLY ANYTHING</strong> 😅 ❤️
+          </p>
         </div>
 
         <section class="special-note-section" aria-labelledby="specialNoteLabel">
@@ -839,7 +1033,8 @@
                 But since there is now Detection of <strong>DANGER</strong> around you <strong>THE BRAIN</strong> has
                 been taken down from now on and the <strong>HEART</strong> has completely taken over and will never be
                 stepping down when it comes to <strong>YOU</strong> and it Finally wants to show you what
-                <strong>YOU</strong> have <strong>ALWAYS MEANT</strong> for me ❤️</p>
+                <strong>YOU</strong> have <strong>ALWAYS MEANT</strong> for me ❤️
+              </p>
             </div>
           </div>
         </section>
@@ -876,29 +1071,21 @@
   </div>
 
 
-<!-- =========================
+  <!-- =========================
      CUSTOM HEART CURSOR
 ========================= -->
 
-<div
-  id="heartCursor"
-  class="heart-cursor"
-  aria-hidden="true"
->
-  <span class="heart-cursor-icon">♥</span>
+  <div id="heartCursor" class="heart-cursor" aria-hidden="true">
+    <span class="heart-cursor-icon">♥</span>
 
-  <span
-    class="heart-cursor-sparkle heart-cursor-sparkle-one"
-  >
-    ✦
-  </span>
+    <span class="heart-cursor-sparkle heart-cursor-sparkle-one">
+      ✦
+    </span>
 
-  <span
-    class="heart-cursor-sparkle heart-cursor-sparkle-two"
-  >
-    ✦
-  </span>
-</div>
+    <span class="heart-cursor-sparkle heart-cursor-sparkle-two">
+      ✦
+    </span>
+  </div>
 
   <!-- =========================
      MUSIC PLAYER
@@ -922,7 +1109,7 @@
 
   </div>
 
-  <script src="script.js?v=16"></script>
+  <script src="script.js?v=17"></script>
 
 </body>
 
