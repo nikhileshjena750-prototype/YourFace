@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enter His Heart</title>
-  <link rel="stylesheet" href="style.css?v=9" />
+  <link rel="stylesheet" href="style.css?v=10" />
 
   <style id="chapter-photo-layout-fix">
     /* EYES: photo 1 first, photo 2 directly below, both centered */
@@ -163,6 +163,40 @@
     .main-experience.show
       .chapter[data-chapter="5"]
       .smile-photo-card img {
+      transform: none !important;
+    }
+
+
+    /* TEETH: the single photo stays centered */
+    .chapter[data-chapter="6"] .teeth-photo-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      width: 100% !important;
+    }
+
+    .chapter[data-chapter="6"] .teeth-photo-card {
+      display: block !important;
+      width: min(760px, 100%) !important;
+      min-height: 0 !important;
+      margin: 0 auto !important;
+      flex: none !important;
+    }
+
+    .chapter[data-chapter="6"] .teeth-photo-card img {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+    }
+
+    .main-experience.show
+      .chapter[data-chapter="6"]
+      .teeth-photo-card img {
       transform: none !important;
     }
   </style>
@@ -432,6 +466,32 @@
 
         <nav class="chapter-nav" aria-label="Chapter navigation">
           <button class="nav-arrow previous-chapter" type="button" aria-label="Return to LIPS-">←</button>
+          <span class="nav-label">Move at your own pace</span>
+          <button class="nav-arrow next-chapter" type="button" aria-label="Move to TEETH-">→</button>
+        </nav>
+      </article>
+
+      <article class="chapter" data-chapter="6" aria-hidden="true">
+        <h2 class="chapter-heading"><strong>TEETH-</strong></h2>
+
+        <div class="photo-grid chapter-photo-grid single-photo-grid teeth-photo-grid">
+          <button class="photo-card single-photo-card teeth-photo-card" type="button" aria-label="Open TEETH picture in full screen">
+            <img src="images/teeth-1.jpg" alt="" />
+          </button>
+        </div>
+
+        <div class="chapter-copy">
+          <p>Well i am not done yet, when you <strong>SMILE</strong> something else also gets revealed for a certain time 😬</p>
+
+          <p>Now this is something maybe most people don't talk about or will ever do or just miss out. Maybe because not everyone has it well.<br>
+          but <strong>YOURS</strong> is one of the Most <strong>NATURALLY PERFECTED TEETHS</strong> i have seen 😁<br>
+          People spend money on it yet still mess up but ur already <strong>NATURALLY PERFECTED IN EVERY ASPECT</strong> 😍❤️</p>
+
+          <p><strong>APSARA</strong> for a <strong>REASON</strong> 💖</p>
+        </div>
+
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+          <button class="nav-arrow previous-chapter" type="button" aria-label="Return to SMILE-">←</button>
           <span class="nav-label">Move at your own pace</span>
         </nav>
       </article>
