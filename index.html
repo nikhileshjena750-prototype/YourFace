@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enter His Heart</title>
-  <link rel="stylesheet" href="style.css?v=7" />
+  <link rel="stylesheet" href="style.css?v=8" />
 
   <style id="chapter-photo-layout-fix">
     /* EYES: photo 1 first, photo 2 directly below, both centered */
@@ -96,6 +96,40 @@
         min-height: 0 !important;
         object-fit: contain !important;
       }
+    }
+
+
+    /* LIPS: the single photo stays centered */
+    .chapter[data-chapter="4"] .lips-photo-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      width: 100% !important;
+    }
+
+    .chapter[data-chapter="4"] .lips-photo-card {
+      display: block !important;
+      width: min(680px, 100%) !important;
+      min-height: 0 !important;
+      margin: 0 auto !important;
+      flex: none !important;
+    }
+
+    .chapter[data-chapter="4"] .lips-photo-card img {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+    }
+
+    .main-experience.show
+      .chapter[data-chapter="4"]
+      .lips-photo-card img {
+      transform: none !important;
     }
   </style>
 
@@ -310,6 +344,35 @@
 
         <nav class="chapter-nav" aria-label="Chapter navigation">
           <button class="nav-arrow previous-chapter" type="button" aria-label="Return to EYES-">←</button>
+          <span class="nav-label">Move at your own pace</span>
+          <button class="nav-arrow next-chapter" type="button" aria-label="Move to LIPS-">→</button>
+        </nav>
+      </article>
+
+      <article class="chapter" data-chapter="4" aria-hidden="true">
+        <h2 class="chapter-heading"><strong>LIPS-</strong></h2>
+
+        <div class="photo-grid chapter-photo-grid single-photo-grid lips-photo-grid">
+          <button class="photo-card single-photo-card lips-photo-card" type="button" aria-label="Open LIPS picture in full screen">
+            <img src="images/lips-1.jpg" alt="" />
+          </button>
+        </div>
+
+        <div class="chapter-copy">
+          <p>Onto your <strong>LIPS</strong>, I mean they are a <strong>MASTERPIECE</strong> 💋, i would go as far to say that if your Face only just had <strong>LIPS</strong> alone i would still be in love with them. Even the shape of your lips are Beautiful 😍.</p>
+
+          <p>Given the fact i have felt it multiple times they are also <strong>VERY VERY SOFT</strong> 😋😘<br>
+          And i remember a thing one of your fatty friend had said that my Lips are great for <strong>Kissing</strong> but <strong>TBH</strong> to me Your <strong>LIPS</strong> are the ones that are <strong>PERFECT</strong> and made to be <strong>KISSED EVERYDAY</strong>😘.</p>
+
+          <p><strong>GIVEN THE FACT THAT YOU ARE THE GODDESS OF SEXINESS</strong> and <strong>THE APSARA</strong>, <strong>KISSING</strong> your <strong>LIPS</strong> have been a <strong>HEAVENLY EXPERIENCE</strong> of my <strong>LIFE</strong> 😍💖</p>
+
+          <p>I mean they are already 11/10 but with those Red lipstick added to them there is <strong>NO SCALE</strong> which i can use to Rate Your Perfectly Shaped Soft <strong>RED LIPS</strong> 💋.</p>
+
+          <p>You are just <strong>OUT OF THE WORLD</strong> and from the <strong>HEAVENS</strong> after that for <strong>ME</strong> ❤️</p>
+        </div>
+
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+          <button class="nav-arrow previous-chapter" type="button" aria-label="Return to NOSE-">←</button>
           <span class="nav-label">Move at your own pace</span>
         </nav>
       </article>
