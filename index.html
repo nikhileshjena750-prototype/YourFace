@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enter His Heart</title>
-  <link rel="stylesheet" href="style.css?v=10" />
+  <link rel="stylesheet" href="style.css?v=11" />
 
   <style id="chapter-photo-layout-fix">
     /* EYES: photo 1 first, photo 2 directly below, both centered */
@@ -198,6 +198,269 @@
       .chapter[data-chapter="6"]
       .teeth-photo-card img {
       transform: none !important;
+    }
+
+
+    /* FINAL CHAPTER */
+    .final-heading {
+      max-width: 1000px;
+      margin-inline: auto;
+    }
+
+    .final-heading-heart {
+      display: block;
+      width: fit-content;
+      margin: 18px auto 0;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      filter: drop-shadow(0 0 16px rgba(255, 95, 158, 0.72));
+      animation: pulse 1.7s ease-in-out infinite;
+    }
+
+    .final-intro-copy {
+      margin-top: clamp(34px, 6vw, 64px);
+    }
+
+    .special-note-section {
+      width: min(900px, 100%);
+      margin: clamp(48px, 8vw, 90px) auto 0;
+      text-align: center;
+    }
+
+    .love-envelope {
+      display: grid;
+      place-items: center;
+      width: min(360px, 86vw);
+      min-height: 230px;
+      margin: 0 auto;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .envelope-shell {
+      position: relative;
+      display: block;
+      width: min(320px, 82vw);
+      aspect-ratio: 1.42 / 1;
+      filter:
+        drop-shadow(0 20px 35px rgba(0, 0, 0, 0.34))
+        drop-shadow(0 0 24px rgba(255, 95, 158, 0.2));
+      transition: transform 0.35s ease;
+    }
+
+    .love-envelope:hover .envelope-shell {
+      transform: translateY(-5px) scale(1.025);
+    }
+
+    .envelope-back,
+    .envelope-front,
+    .envelope-flap,
+    .envelope-letter {
+      position: absolute;
+      left: 0;
+      width: 100%;
+    }
+
+    .envelope-back {
+      inset: 14% 0 0;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #f8b8ce, #d94c82);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+
+    .envelope-letter {
+      left: 8%;
+      bottom: 15%;
+      width: 84%;
+      height: 66%;
+      display: grid;
+      place-items: center;
+      border-radius: 14px 14px 8px 8px;
+      background: linear-gradient(180deg, #fffafc, #ffeaf2);
+      transform: translateY(18%);
+      transition: transform 0.65s cubic-bezier(.2,.8,.2,1);
+      z-index: 1;
+    }
+
+    .envelope-letter-heart {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 0 10px rgba(255, 95, 158, 0.55));
+    }
+
+    .envelope-front {
+      inset: 34% 0 0;
+      border-radius: 0 0 20px 20px;
+      background: linear-gradient(to top, #d84b82, #ef89b1);
+      clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+      z-index: 3;
+    }
+
+    .envelope-flap {
+      top: 14%;
+      height: 55%;
+      transform-origin: 50% 0;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: linear-gradient(160deg, #ffc1d6, #e66999);
+      border-radius: 20px 20px 0 0;
+      z-index: 4;
+      transition:
+        transform 0.65s cubic-bezier(.2,.8,.2,1),
+        z-index 0s linear 0.32s;
+    }
+
+    .envelope-seal {
+      position: absolute;
+      left: 50%;
+      top: 47%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #a70d48, #e74d87);
+      border: 2px solid rgba(255,255,255,0.34);
+      box-shadow: 0 7px 18px rgba(83, 0, 31, 0.35);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .love-envelope.is-open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 0;
+    }
+
+    .love-envelope.is-open .envelope-letter {
+      transform: translateY(-34%);
+    }
+
+    .love-envelope.is-open .envelope-seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.65);
+    }
+
+    .special-note-label {
+      margin-top: 14px;
+      font-size: clamp(1.05rem, 3vw, 1.3rem);
+      letter-spacing: 0.12em;
+      color: var(--rose-light);
+      text-shadow: 0 0 12px rgba(255, 95, 158, 0.3);
+    }
+
+    .special-note-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      margin-top: 0;
+      transition:
+        grid-template-rows 0.65s ease,
+        opacity 0.45s ease,
+        margin-top 0.65s ease;
+    }
+
+    .special-note-content.show {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      margin-top: 28px;
+    }
+
+    .special-note-paper {
+      position: relative;
+      overflow: hidden;
+      width: min(820px, 100%);
+      min-height: 0;
+      margin: 0 auto;
+      padding: clamp(34px, 6vw, 62px) clamp(22px, 5vw, 56px);
+      border-radius: 24px;
+      color: #4c1830;
+      background: linear-gradient(180deg, #fffafc, #ffeaf2);
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow:
+        0 24px 65px rgba(0,0,0,0.38),
+        0 0 34px rgba(255,95,158,0.15);
+      font-size: clamp(1rem, 2.2vw, 1.24rem);
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .special-note-paper p {
+      margin: 0;
+    }
+
+    .special-note-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(106, 27, 57, 0.18);
+      background: rgba(255,255,255,0.72);
+      color: #8f1746;
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
+
+    .final-love-message {
+      width: min(900px, 100%);
+      margin: clamp(58px, 9vw, 100px) auto 0;
+      text-align: center;
+      font-size: clamp(1.05rem, 2.5vw, 1.48rem);
+      line-height: 1.75;
+      color: var(--rose-light);
+    }
+
+    .final-love-message p {
+      margin: 0 0 1.5em;
+    }
+
+    .chapter[data-chapter="7"] .final-photo-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      width: 100% !important;
+      margin-top: clamp(40px, 7vw, 72px);
+    }
+
+    .chapter[data-chapter="7"] .final-photo-card {
+      display: block !important;
+      width: min(760px, 100%) !important;
+      min-height: 0 !important;
+      margin: 0 auto !important;
+      flex: none !important;
+    }
+
+    .chapter[data-chapter="7"] .final-photo-card img {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+    }
+
+    .main-experience.show
+      .chapter[data-chapter="7"]
+      .final-photo-card img {
+      transform: none !important;
+    }
+
+    @media (max-width: 560px) {
+      .love-envelope {
+        min-height: 205px;
+      }
+
+      .envelope-shell {
+        width: min(290px, 84vw);
+      }
+
+      .special-note-paper {
+        line-height: 1.7;
+      }
     }
   </style>
 
@@ -493,6 +756,71 @@
         <nav class="chapter-nav" aria-label="Chapter navigation">
           <button class="nav-arrow previous-chapter" type="button" aria-label="Return to SMILE-">←</button>
           <span class="nav-label">Move at your own pace</span>
+          <button class="nav-arrow next-chapter" type="button" aria-label="Move to THE APSARA OF MY HEART">→</button>
+        </nav>
+      </article>
+
+      <article class="chapter final-chapter" data-chapter="7" aria-hidden="true">
+        <h2 class="chapter-heading final-heading"><strong>THE APSARA OF MY HEART</strong></h2>
+        <div class="final-heading-heart" aria-hidden="true">❤️</div>
+
+        <div class="chapter-copy final-intro-copy">
+          <p>Overall i just want to say Your <strong>FACE</strong> just completely <strong>LIGHTENS</strong> up my <strong>WORLD</strong> 😍 .<br>
+          Given the fact since you are <strong>ONLY</strong> my <strong>WOLRD</strong>🌎.<br>
+          Just looking at you makes me want to <strong>FREEZE</strong> the <strong>WORLD</strong> and <strong>US FOREVER</strong> 🫂❤️<br>
+          And i would also like to add one thing, that if you keep <strong>LOOKING</strong> at me <strong>CONSTANTLY</strong> and give me a <strong>SMILE</strong> and <strong>ASK</strong> something <strong>OUT</strong> of me, let me tell you something, <strong>HONESTLY</strong> you can make me do <strong>ANYTHING</strong>, <strong>LITERALLY ANYTHING</strong> 😅 ❤️</p>
+        </div>
+
+        <section class="special-note-section" aria-labelledby="specialNoteLabel">
+          <button
+            class="love-envelope"
+            id="loveEnvelope"
+            type="button"
+            aria-expanded="false"
+            aria-controls="specialNoteContent"
+            aria-label="Open SPECIAL NOTE"
+          >
+            <span class="envelope-shell" aria-hidden="true">
+              <span class="envelope-back"></span>
+              <span class="envelope-letter">
+                <span class="envelope-letter-heart">❤️</span>
+              </span>
+              <span class="envelope-front"></span>
+              <span class="envelope-flap"></span>
+              <span class="envelope-seal">❤️</span>
+            </span>
+          </button>
+
+          <div class="special-note-label" id="specialNoteLabel"><strong>SPECIAL NOTE</strong></div>
+
+          <div class="special-note-content" id="specialNoteContent" aria-hidden="true">
+            <div class="special-note-paper">
+              <button class="special-note-close" id="specialNoteClose" type="button" aria-label="Close SPECIAL NOTE">×</button>
+              <p>Also just want add something personal, its not like i never <strong>CARED</strong> its just that maybe i didn't show much since you were always a <strong>SAFE SPACE</strong> for me, my Brain might have been running on Autopilot holding my Heart 🥹.<br>
+              But since there is now Detection of <strong>DANGER</strong> around you <strong>THE BRAIN</strong> has been taken down from now on and the <strong>HEART</strong> has completely taken over and will never be stepping down when it comes to <strong>YOU</strong> and it Finally wants to show you what <strong>YOU</strong> have <strong>ALWAYS MEANT</strong> for me ❤️</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="final-love-message">
+          <p>With All My <strong>EVERLASTING LOVE</strong> i want to say,</p>
+
+          <p><strong>I HAVE LOVED YOU, STILL LOVE YOU</strong> and <strong>WILL ALWAYS LOVE YOU TILL MY LAST BREATH</strong><br>
+          💖</p>
+
+          <p><strong>YOUR NIKHILESH</strong><br>
+          ❤️😃❤️</p>
+        </div>
+
+        <div class="photo-grid chapter-photo-grid single-photo-grid final-photo-grid">
+          <button class="photo-card single-photo-card final-photo-card" type="button" aria-label="Open final picture in full screen">
+            <img src="images/final-1.jpg" alt="" />
+          </button>
+        </div>
+
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+          <button class="nav-arrow previous-chapter" type="button" aria-label="Return to TEETH-">←</button>
+          <span class="nav-label">Stay here for as long as you want</span>
         </nav>
       </article>
     </div>
@@ -502,6 +830,6 @@
     <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close full screen image">×</button>
     <img id="lightboxImage" src="" alt="" />
   </div>
-  <script src="script.js"></script>
+  <script src="script.js?v=11"></script>
 </body>
 </html>

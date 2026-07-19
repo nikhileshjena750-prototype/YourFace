@@ -44,9 +44,15 @@ loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const values = {
-    goddessName: normalize(document.getElementById("goddessName").value),
-    goddessAddress: normalize(document.getElementById("goddessAddress").value),
-    relationship: normalize(document.getElementById("relationship").value)
+    goddessName: normalize(
+      document.getElementById("goddessName").value
+    ),
+    goddessAddress: normalize(
+      document.getElementById("goddessAddress").value
+    ),
+    relationship: normalize(
+      document.getElementById("relationship").value
+    )
   };
 
   const valid =
@@ -74,26 +80,33 @@ errorModal.addEventListener("click", (event) => {
 let holdStart = null;
 let rafId = null;
 let holding = false;
+
 const holdDuration = 3000;
 
 function resetHold() {
   holding = false;
   holdStart = null;
+
   cancelAnimationFrame(rafId);
+
   holdButton.style.setProperty("--progress", 0);
   progressText.textContent = "0%";
 }
 
 function completeHold() {
   holding = false;
+
   cancelAnimationFrame(rafId);
+
   holdButton.style.setProperty("--progress", 100);
   progressText.textContent = "100%";
 
   setTimeout(() => {
     hideModal(successModal);
+
     mainExperience.classList.add("show");
     mainExperience.setAttribute("aria-hidden", "false");
+
     document.body.style.overflow = "hidden";
     mainExperience.scrollTop = 0;
   }, 350);
@@ -102,10 +115,15 @@ function completeHold() {
 function animateHold(timestamp) {
   if (!holding) return;
 
-  if (!holdStart) holdStart = timestamp;
+  if (!holdStart) {
+    holdStart = timestamp;
+  }
 
   const elapsed = timestamp - holdStart;
-  const progress = Math.min((elapsed / holdDuration) * 100, 100);
+  const progress = Math.min(
+    (elapsed / holdDuration) * 100,
+    100
+  );
 
   holdButton.style.setProperty("--progress", progress);
   progressText.textContent = `${Math.floor(progress)}%`;
@@ -120,15 +138,22 @@ function animateHold(timestamp) {
 
 function startHold(event) {
   event.preventDefault();
+
   if (holding) return;
+
   holding = true;
   holdStart = null;
+
   rafId = requestAnimationFrame(animateHold);
 }
 
 function stopHold(event) {
-  if (event) event.preventDefault();
+  if (event) {
+    event.preventDefault();
+  }
+
   if (!holding) return;
+
   resetHold();
 }
 
@@ -136,9 +161,15 @@ holdButton.addEventListener("pointerdown", startHold);
 holdButton.addEventListener("pointerup", stopHold);
 holdButton.addEventListener("pointerleave", stopHold);
 holdButton.addEventListener("pointercancel", stopHold);
-holdButton.addEventListener("contextmenu", (event) => event.preventDefault());
 
-const chapters = Array.from(document.querySelectorAll(".chapter"));
+holdButton.addEventListener("contextmenu", (event) => {
+  event.preventDefault();
+});
+
+const chapters = Array.from(
+  document.querySelectorAll(".chapter")
+);
+
 let currentChapter = 0;
 let chapterTransitioning = false;
 
@@ -158,12 +189,19 @@ function showChapter(targetIndex, direction) {
   const target = chapters[targetIndex];
 
   current.classList.remove("active");
+
   current.classList.add(
-    direction === "next" ? "leaving-left" : "leaving-right"
+    direction === "next"
+      ? "leaving-left"
+      : "leaving-right"
   );
 
   setTimeout(() => {
-    current.classList.remove("leaving-left", "leaving-right");
+    current.classList.remove(
+      "leaving-left",
+      "leaving-right"
+    );
+
     current.setAttribute("aria-hidden", "true");
 
     target.classList.add("active");
@@ -182,19 +220,23 @@ function showChapter(targetIndex, direction) {
   }, 420);
 }
 
-document.querySelectorAll(".next-chapter").forEach((button) => {
-  button.addEventListener("click", () => {
-    showChapter(currentChapter + 1, "next");
+document
+  .querySelectorAll(".next-chapter")
+  .forEach((button) => {
+    button.addEventListener("click", () => {
+      showChapter(currentChapter + 1, "next");
+    });
   });
-});
 
-document.querySelectorAll(".previous-chapter").forEach((button) => {
-  button.addEventListener("click", () => {
-    showChapter(currentChapter - 1, "previous");
+document
+  .querySelectorAll(".previous-chapter")
+  .forEach((button) => {
+    button.addEventListener("click", () => {
+      showChapter(currentChapter - 1, "previous");
+    });
   });
-});
 
-photoCards.forEach((card) => {
+  photoCards.forEach((card) => {
   card.addEventListener("click", () => {
     const image = card.querySelector("img");
 
@@ -214,7 +256,10 @@ function closeLightbox() {
   }, 300);
 }
 
-lightboxClose.addEventListener("click", closeLightbox);
+lightboxClose.addEventListener(
+  "click",
+  closeLightbox
+);
 
 lightbox.addEventListener("click", (event) => {
   if (event.target === lightbox) {
@@ -230,3 +275,76 @@ document.addEventListener("keydown", (event) => {
     closeLightbox();
   }
 });
+
+const loveEnvelope =
+  document.getElementById("loveEnvelope");
+
+const specialNoteContent =
+  document.getElementById("specialNoteContent");
+
+const specialNoteClose =
+  document.getElementById("specialNoteClose");
+
+function openSpecialNote() {
+  loveEnvelope.classList.add("is-open");
+
+  loveEnvelope.setAttribute(
+    "aria-expanded",
+    "true"
+  );
+
+  loveEnvelope.setAttribute(
+    "aria-label",
+    "Close SPECIAL NOTE"
+  );
+
+  specialNoteContent.classList.add("show");
+
+  specialNoteContent.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+}
+
+function closeSpecialNote() {
+  loveEnvelope.classList.remove("is-open");
+
+  loveEnvelope.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+
+  loveEnvelope.setAttribute(
+    "aria-label",
+    "Open SPECIAL NOTE"
+  );
+
+  specialNoteContent.classList.remove("show");
+
+  specialNoteContent.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+}
+
+loveEnvelope.addEventListener("click", () => {
+  const isOpen =
+    loveEnvelope.getAttribute("aria-expanded") ===
+    "true";
+
+  if (isOpen) {
+    closeSpecialNote();
+  } else {
+    openSpecialNote();
+  }
+});
+
+specialNoteClose.addEventListener(
+  "click",
+  (event) => {
+    event.stopPropagation();
+
+    closeSpecialNote();
+    loveEnvelope.focus();
+  }
+);
