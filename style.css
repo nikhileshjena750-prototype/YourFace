@@ -504,25 +504,48 @@ body::after {
   background: linear-gradient(to top, rgba(20, 0, 10, 0.22), transparent 35%);
 }
 
+/*====================================================
+CHAPTER TRANSITIONS
+Version: 2.0
+====================================================*/
+
 .chapter {
   display: none;
   opacity: 0;
-  transform: translateX(24px);
+  transform: translateX(0) scale(0.992);
+  will-change: opacity, transform;
 }
 
 .chapter.active {
   display: block;
-  animation: chapterEnter 0.75s ease forwards;
+}
+
+/*
+Used when the website first opens on Chapter 1.
+Later chapters receive a directional entrance class through JavaScript.
+*/
+.chapter.active:not(.entering-from-right):not(.entering-from-left) {
+  animation: chapterInitialEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.chapter.active.entering-from-right {
+  animation: chapterEnterFromRight 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.chapter.active.entering-from-left {
+  animation: chapterEnterFromLeft 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .chapter.leaving-left {
   display: block;
-  animation: chapterLeaveLeft 0.42s ease forwards;
+  pointer-events: none;
+  animation: chapterLeaveLeft 0.38s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
 .chapter.leaving-right {
   display: block;
-  animation: chapterLeaveRight 0.42s ease forwards;
+  pointer-events: none;
+  animation: chapterLeaveRight 0.38s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
 .chapter-heading {
@@ -637,39 +660,73 @@ body::after {
   margin-top: clamp(34px, 5vw, 58px);
 }
 
-@keyframes chapterEnter {
+@keyframes chapterInitialEnter {
   from {
     opacity: 0;
-    transform: translateX(24px);
+    transform: translateY(18px) scale(0.992);
+    filter: blur(3px);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes chapterEnterFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(42px) scale(0.992);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes chapterEnterFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-42px) scale(0.992);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
   }
 }
 
 @keyframes chapterLeaveLeft {
   from {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
+    filter: blur(0);
   }
 
   to {
     opacity: 0;
-    transform: translateX(-24px);
+    transform: translateX(-32px) scale(0.992);
+    filter: blur(2px);
   }
 }
 
 @keyframes chapterLeaveRight {
   from {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
+    filter: blur(0);
   }
 
   to {
     opacity: 0;
-    transform: translateX(24px);
+    transform: translateX(32px) scale(0.992);
+    filter: blur(2px);
   }
 }
 

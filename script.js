@@ -176,6 +176,16 @@ const chapters = Array.from(
 let currentChapter = 0;
 let chapterTransitioning = false;
 
+
+/*====================================================
+CHAPTER NAVIGATION
+Transition Version: 2.0
+====================================================*/
+
+const reducedMotionQuery = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+);
+
 function showChapter(targetIndex, direction) {
   if (
     chapterTransitioning ||
@@ -191,13 +201,39 @@ function showChapter(targetIndex, direction) {
   const current = chapters[currentChapter];
   const target = chapters[targetIndex];
 
-  current.classList.remove("active");
-
-  current.classList.add(
+  const leavingClass =
     direction === "next"
       ? "leaving-left"
-      : "leaving-right"
+      : "leaving-right";
+
+  const enteringClass =
+    direction === "next"
+      ? "entering-from-right"
+      : "entering-from-left";
+
+  const reducedMotion = reducedMotionQuery.matches;
+  const leaveDuration = reducedMotion ? 20 : 380;
+  const enterDuration = reducedMotion ? 20 : 780;
+
+  /*
+  Remove any classes that could remain from an interrupted
+  or previously completed transition.
+  */
+  current.classList.remove(
+    "entering-from-right",
+    "entering-from-left"
   );
+
+  target.classList.remove(
+    "active",
+    "leaving-left",
+    "leaving-right",
+    "entering-from-right",
+    "entering-from-left"
+  );
+
+  current.classList.remove("active");
+  current.classList.add(leavingClass);
 
   setTimeout(() => {
     current.classList.remove(
@@ -207,20 +243,29 @@ function showChapter(targetIndex, direction) {
 
     current.setAttribute("aria-hidden", "true");
 
-    target.classList.add("active");
+    /*
+    Return the story viewport to the top before revealing
+    the next chapter, preventing content from appearing midway.
+    */
+    mainExperience.scrollTo({
+      top: 0,
+      behavior: reducedMotion ? "auto" : "smooth"
+    });
+
+    target.classList.add("active", enteringClass);
     target.setAttribute("aria-hidden", "false");
 
     currentChapter = targetIndex;
 
-    mainExperience.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
     setTimeout(() => {
+      target.classList.remove(
+        "entering-from-right",
+        "entering-from-left"
+      );
+
       chapterTransitioning = false;
-    }, 760);
-  }, 420);
+    }, enterDuration);
+  }, leaveDuration);
 }
 
 document
