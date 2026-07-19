@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enter His Heart</title>
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=9" />
 
   <style id="chapter-photo-layout-fix">
     /* EYES: photo 1 first, photo 2 directly below, both centered */
@@ -129,6 +129,40 @@
     .main-experience.show
       .chapter[data-chapter="4"]
       .lips-photo-card img {
+      transform: none !important;
+    }
+
+
+    /* SMILE: the single photo stays centered */
+    .chapter[data-chapter="5"] .smile-photo-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      width: 100% !important;
+    }
+
+    .chapter[data-chapter="5"] .smile-photo-card {
+      display: block !important;
+      width: min(680px, 100%) !important;
+      min-height: 0 !important;
+      margin: 0 auto !important;
+      flex: none !important;
+    }
+
+    .chapter[data-chapter="5"] .smile-photo-card img {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: none !important;
+    }
+
+    .main-experience.show
+      .chapter[data-chapter="5"]
+      .smile-photo-card img {
       transform: none !important;
     }
   </style>
@@ -373,6 +407,31 @@
 
         <nav class="chapter-nav" aria-label="Chapter navigation">
           <button class="nav-arrow previous-chapter" type="button" aria-label="Return to NOSE-">←</button>
+          <span class="nav-label">Move at your own pace</span>
+          <button class="nav-arrow next-chapter" type="button" aria-label="Move to SMILE-">→</button>
+        </nav>
+      </article>
+
+      <article class="chapter" data-chapter="5" aria-hidden="true">
+        <h2 class="chapter-heading"><strong>SMILE-</strong></h2>
+
+        <div class="photo-grid chapter-photo-grid single-photo-grid smile-photo-grid">
+          <button class="photo-card single-photo-card smile-photo-card" type="button" aria-label="Open SMILE picture in full screen">
+            <img src="images/smile-1.jpg" alt="" />
+          </button>
+        </div>
+
+        <div class="chapter-copy">
+          <p>Its not just your <strong>LIPS</strong> your <strong>SMILE</strong> is something else as well, its like a <strong>RADIATION</strong> of <strong>HAPPINESS UNSTOPPABLE</strong> 💖</p>
+
+          <p>Being <strong>CUTE</strong> and with that <strong>SMILE</strong>, <strong>MY HEARTS SKIPS A BEAT WHEN I SEE YOU</strong> 💖<br>
+          <strong>TBH</strong> a <strong>HAPPY</strong> and <strong>SMILING</strong> you is one of my <strong>FAVIORITE</strong> things to look at and i would do <strong>ANYTHING</strong> to see that <strong>EVERYDAY</strong> on your <strong>BEAUTIFUL FACE</strong> 🥹❤️.</p>
+
+          <p><strong>PLEASE NEVER EVER STOP SMILING NO MATTER WHAT HAPPENS IN LIFE</strong> 😇❤️</p>
+        </div>
+
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+          <button class="nav-arrow previous-chapter" type="button" aria-label="Return to LIPS-">←</button>
           <span class="nav-label">Move at your own pace</span>
         </nav>
       </article>
