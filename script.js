@@ -203,6 +203,32 @@ holdButton.addEventListener("pointerdown", startHold);
 holdButton.addEventListener("pointerup", stopHold);
 holdButton.addEventListener("pointerleave", stopHold);
 holdButton.addEventListener("pointercancel", stopHold);
+/*
+Allow keyboard visitors to hold the heart using Space or Enter.
+*/
+holdButton.addEventListener("keydown", (event) => {
+  const isHoldKey =
+    event.key === " " ||
+    event.key === "Enter";
+
+  if (!isHoldKey || event.repeat) {
+    return;
+  }
+
+  startHold(event);
+});
+
+holdButton.addEventListener("keyup", (event) => {
+  const isHoldKey =
+    event.key === " " ||
+    event.key === "Enter";
+
+  if (!isHoldKey) {
+    return;
+  }
+
+  stopHold(event);
+});
 
 holdButton.addEventListener("contextmenu", (event) => {
   event.preventDefault();
@@ -498,11 +524,17 @@ chapterImages.forEach((image) => {
   image.addEventListener("error", () => {
     const card = image.closest(".photo-card");
 
-    card?.classList.add("image-load-error");
-    card?.setAttribute(
+    if (!card) {
+      return;
+    }
+
+    card.classList.add("image-load-error");
+    card.setAttribute(
       "aria-label",
       "This picture could not be loaded"
     );
+
+    card.disabled = true;
   });
 
   if (image.complete && image.naturalWidth > 0) {

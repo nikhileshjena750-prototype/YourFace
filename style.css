@@ -2320,3 +2320,8 @@ html {
     background-color: rgba(39, 4, 20, 0.94);
   }
 }
+
+.photo-card.image-load-error:disabled {
+  opacity: 1;
+  cursor: default;
+}
