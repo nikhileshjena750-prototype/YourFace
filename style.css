@@ -1782,3 +1782,411 @@ Version: 1.0
   }
 
 }
+
+/*====================================================
+RESPONSIVE AUDIT
+Pass 5A — Responsive Foundation
+====================================================*/
+
+/*
+Use the dynamic viewport height where supported so mobile browser
+toolbars do not crop the login page, modals, or story experience.
+*/
+html,
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body {
+  padding-top:
+    max(32px, env(safe-area-inset-top));
+  padding-right:
+    max(18px, env(safe-area-inset-right));
+  padding-bottom:
+    max(32px, env(safe-area-inset-bottom));
+  padding-left:
+    max(18px, env(safe-area-inset-left));
+}
+
+/*
+Allow modal content to scroll safely on short phones and landscape
+screens instead of being clipped above or below the viewport.
+*/
+.modal {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  padding-top:
+    max(18px, env(safe-area-inset-top));
+  padding-right:
+    max(18px, env(safe-area-inset-right));
+  padding-bottom:
+    max(18px, env(safe-area-inset-bottom));
+  padding-left:
+    max(18px, env(safe-area-inset-left));
+}
+
+.modal-content {
+  margin-block: auto;
+}
+
+/*
+Keep the story viewport stable when mobile browser controls expand
+or collapse.
+*/
+.main-experience {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  padding-top:
+    max(clamp(28px, 5vw, 64px), env(safe-area-inset-top));
+
+  padding-right:
+    max(18px, env(safe-area-inset-right));
+
+  padding-left:
+    max(18px, env(safe-area-inset-left));
+
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*
+Prevent long words, uppercase phrases, or URLs from creating
+horizontal overflow inside romantic text sections.
+*/
+.intro,
+.details-copy,
+.declaration,
+.chapter-copy,
+.final-love-message,
+.special-note-paper,
+.nav-label {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/*
+Lightbox safe areas and dynamic viewport sizing.
+*/
+.lightbox {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  padding-top:
+    max(18px, env(safe-area-inset-top));
+
+  padding-right:
+    max(18px, env(safe-area-inset-right));
+
+  padding-bottom:
+    max(18px, env(safe-area-inset-bottom));
+
+  padding-left:
+    max(18px, env(safe-area-inset-left));
+}
+
+.lightbox img {
+  max-width: min(96vw, 1280px);
+
+  max-height:
+    min(
+      90vh,
+      calc(
+        100dvh -
+        max(36px, env(safe-area-inset-top)) -
+        max(36px, env(safe-area-inset-bottom))
+      )
+    );
+}
+
+.lightbox-close {
+  top:
+    max(16px, env(safe-area-inset-top));
+
+  right:
+    max(16px, env(safe-area-inset-right));
+}
+
+/*
+Maintain accessible touch targets.
+*/
+.enter-btn,
+.close-error,
+.nav-arrow,
+.special-note-close,
+.music-player button,
+.lightbox-close {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/*
+Allow the music progress bar to shrink inside narrow flex layouts.
+*/
+.music-player {
+  max-width:
+    calc(
+      100vw -
+      max(28px, env(safe-area-inset-left)) -
+      max(28px, env(safe-area-inset-right))
+    );
+}
+
+.music-player button {
+  flex: 0 0 auto;
+}
+
+#musicProgress {
+  min-width: 0;
+}
+
+/*====================================================
+PHONES
+====================================================*/
+
+@media (max-width: 767px) {
+  body {
+    padding-top:
+      max(18px, env(safe-area-inset-top));
+
+    padding-right:
+      max(14px, env(safe-area-inset-right));
+
+    padding-bottom:
+      max(18px, env(safe-area-inset-bottom));
+
+    padding-left:
+      max(14px, env(safe-area-inset-left));
+  }
+
+  .main-experience {
+    padding-top:
+      max(30px, env(safe-area-inset-top));
+
+    padding-right:
+      max(14px, env(safe-area-inset-right));
+
+    padding-left:
+      max(14px, env(safe-area-inset-left));
+  }
+
+  .chapter-copy {
+    width: min(100%, 680px);
+  }
+
+  .photo-card {
+    width: 100%;
+  }
+
+  .music-player {
+    right:
+      max(14px, env(safe-area-inset-right));
+
+    left:
+      max(14px, env(safe-area-inset-left));
+
+    bottom:
+      max(16px, env(safe-area-inset-bottom));
+
+    width: auto;
+    max-width: none;
+  }
+
+  #musicProgress {
+    flex: 1 1 auto;
+    width: auto;
+  }
+}
+
+/*====================================================
+VERY SMALL PHONES — 320px TO 390px
+====================================================*/
+
+@media (max-width: 390px) {
+  .main-experience {
+    padding-right:
+      max(12px, env(safe-area-inset-right));
+
+    padding-left:
+      max(12px, env(safe-area-inset-left));
+  }
+
+  .main-title {
+    font-size: clamp(2rem, 12vw, 3rem);
+    letter-spacing: 0.04em;
+  }
+
+  .chapter-heading {
+    font-size: clamp(1.85rem, 11vw, 2.8rem);
+    letter-spacing: 0.04em;
+  }
+
+  .declaration {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .chapter-copy {
+    font-size: 0.98rem;
+    line-height: 1.72;
+  }
+
+  .chapter-nav {
+    gap: 14px;
+  }
+
+  .nav-arrow {
+    width: 58px;
+    height: 58px;
+  }
+
+  .nav-label {
+    min-width: 0;
+    padding-inline: 8px;
+    font-size: 0.84rem;
+  }
+
+  .music-player {
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 17px;
+  }
+
+  .music-player button {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    font-size: 18px;
+  }
+
+  /*
+  These selectors use !important because the envelope layout currently
+  lives in the later inline style block inside index.html.
+  */
+  .love-envelope {
+    width: min(320px, 88vw) !important;
+    min-height: 190px !important;
+  }
+
+  .envelope-shell {
+    width: min(270px, 82vw) !important;
+  }
+
+  .special-note-paper {
+    padding:
+      42px 18px 28px !important;
+
+    border-radius: 20px !important;
+    font-size: 0.96rem !important;
+    line-height: 1.68 !important;
+  }
+}
+
+/*====================================================
+SHORT LANDSCAPE VIEWPORTS
+====================================================*/
+
+@media (orientation: landscape) and (max-height: 640px) {
+  .modal {
+    place-items: start center;
+  }
+
+  .modal-content {
+    margin-block: 0;
+  }
+
+  .heart-stage {
+    width: min(300px, 54vh);
+  }
+
+  .heart-message {
+    font-size: clamp(0.82rem, 2.5vw, 1.05rem);
+    line-height: 1.3;
+  }
+
+  .heart-message .emoji {
+    margin-top: 4px;
+    font-size: 1.4rem;
+  }
+
+  .hold-wrap {
+    gap: 5px;
+    margin-top: 6px;
+  }
+
+  .hold-button {
+    width: 88px;
+    height: 88px;
+  }
+
+  .hold-heart {
+    font-size: 2.35rem;
+  }
+
+  .main-experience {
+    padding-top:
+      max(18px, env(safe-area-inset-top));
+
+    padding-right:
+      max(14px, env(safe-area-inset-right));
+
+    padding-left:
+      max(14px, env(safe-area-inset-left));
+
+    padding-bottom:
+      max(104px, calc(86px + env(safe-area-inset-bottom)));
+  }
+
+  .chapter-heading {
+    font-size: clamp(1.85rem, 8vw, 3.2rem);
+  }
+
+  .chapter-copy {
+    margin-top: 28px;
+  }
+
+  .chapter-nav {
+    margin-top: 34px;
+  }
+
+  .lightbox img {
+    max-height:
+      calc(
+        100dvh -
+        max(24px, env(safe-area-inset-top)) -
+        max(24px, env(safe-area-inset-bottom))
+      );
+  }
+}
+
+/*====================================================
+TABLET LANDSCAPE
+====================================================*/
+
+@media
+  (min-width: 768px) and
+  (max-width: 1400px) and
+  (orientation: landscape) {
+
+  .main-content-shell {
+    width: min(1120px, 94vw);
+  }
+
+  .chapter-copy {
+    width: min(920px, 92%);
+  }
+
+  .photo-grid {
+    gap: clamp(20px, 2.6vw, 32px);
+  }
+}
