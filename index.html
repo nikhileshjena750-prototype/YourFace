@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enter His Heart</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="login-card" aria-labelledby="loginHeading">
+      <p class="intro" id="loginHeading">
+        This page is created only to be Accessed by the '<strong>GODDESS</strong>' who Nikhilesh <strong>TRULY LOVES</strong> and will <strong>FOREVER LOVE</strong> in his <strong>ENTIRE LIFE</strong>
+      </p>
+
+      <div class="main-heart" aria-hidden="true">❤️</div>
+
+      <p class="details-copy">
+        Below are the <strong>DETAILS REQUIRED</strong> inorder to enter his '<strong>HEART</strong>'-
+      </p>
+
+      <form id="loginForm" novalidate>
+        <div class="fields">
+          <div class="field-group">
+            <label for="goddessName">1. Name of the '<strong>GODDESS</strong>'</label>
+            <input id="goddessName" name="goddessName" type="text" maxlength="30" autocomplete="off" />
+          </div>
+
+          <div class="field-group">
+            <label for="goddessAddress">2. Address of the <strong>GODDESS</strong> ( Ex. CITY)</label>
+            <input id="goddessAddress" name="goddessAddress" type="text" maxlength="30" autocomplete="off" aria-describedby="addressHint" />
+            <div class="address-hint" id="addressHint">
+              Do Note- '<strong>GODDESS</strong>' <strong>ALWAYS LIVES INSIDE HIS</strong> '<strong>HEART</strong>' 😘
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="relationship">3. What are you to Nikhilesh?</label>
+            <input id="relationship" name="relationship" type="text" maxlength="30" autocomplete="off" />
+          </div>
+        </div>
+
+        <button class="enter-btn" type="submit">
+          ENTER HIS HEART
+          <span class="btn-heart">❤️</span>
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <section class="modal" id="successModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <div class="heart-stage">
+        <svg class="heart-bg" viewBox="0 0 512 460" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff96bf"/>
+              <stop offset="52%" stop-color="#f44c8d"/>
+              <stop offset="100%" stop-color="#bd0f4e"/>
+            </linearGradient>
+          </defs>
+          <path d="M256 438C238 420 64 308 32 188C9 103 59 28 141 18C194 12 235 40 256 77C277 40 318 12 371 18C453 28 503 103 480 188C448 308 274 420 256 438Z"/>
+        </svg>
+        <span class="floating-heart">❤️</span>
+        <span class="floating-heart">💕</span>
+        <span class="floating-heart">❤️</span>
+        <span class="floating-heart">💕</span>
+        <span class="floating-heart">❤️</span>
+
+        <div class="heart-message">
+          '<strong>FINALLY THE GODDESS HAS ARRIVED</strong>'
+          <span class="emoji">❤️</span>
+        </div>
+      </div>
+
+      <p class="success-info">
+        Hold onto his '<strong>HEART</strong>' inorder to know what his <strong>FEELINGS</strong> are.
+      </p>
+
+      <div class="hold-wrap">
+        <button class="hold-button" id="holdButton" type="button" aria-label="Hold onto his HEART">
+          <span class="hold-heart">❤️</span>
+          <span class="progress-text" id="progressText">0%</span>
+        </button>
+        <div class="hold-hint">Press and hold</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="modal" id="errorModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <div class="heart-stage">
+        <svg class="heart-bg" viewBox="0 0 512 460" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff96bf"/>
+              <stop offset="52%" stop-color="#f44c8d"/>
+              <stop offset="100%" stop-color="#bd0f4e"/>
+            </linearGradient>
+          </defs>
+          <path d="M256 438C238 420 64 308 32 188C9 103 59 28 141 18C194 12 235 40 256 77C277 40 318 12 371 18C453 28 503 103 480 188C448 308 274 420 256 438Z"/>
+        </svg>
+        <div class="heart-message">
+          '<strong>IT SEEMS YOU ARE NOT THE GODDESS</strong>'
+          <span class="emoji">💔</span>
+        </div>
+      </div>
+
+      <button class="close-error" id="closeError" type="button">Close</button>
+    </div>
+  </section>
+
+  <section class="main-experience" id="mainExperience" aria-hidden="true">
+    <div class="main-content-shell">
+      <article class="chapter active" data-chapter="0" aria-hidden="false">
+        <h1 class="main-title"><strong>YOUR FACE</strong></h1>
+
+        <p class="declaration">
+          Before you start i would like to <strong>DECLARE</strong> that this is <strong>DEDICATED</strong> To the 'APSARA' I <strong>HAVE SINCERELY LOVED WITH ALL MY HEART</strong>
+          <span class="declaration-heart">❤️</span>
+        </p>
+
+        <div class="photo-grid">
+          <button class="photo-card" type="button" aria-label="Open first picture in full screen">
+            <img src="images/opening-1.jpg" alt="" />
+          </button>
+
+          <button class="photo-card" type="button" aria-label="Open second picture in full screen">
+            <img src="images/opening-2.jpg" alt="" />
+          </button>
+        </div>
+
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+          <button class="nav-arrow next-chapter" type="button" aria-label="Move to FACE-">→</button>
+          <span class="nav-label">Move forward when you feel ready</span>
+        </nav>
+      </article>
+
+      <article class="chapter" data-chapter="1" aria-hidden="true">
+        <h2 class="chapter-heading"><strong>FACE-</strong></h2>
+
+        <div class="photo-grid chapter-photo-grid">
+          <button class="photo-card" type="button" aria-label="Open FACE first picture in full screen">
+            <img src="images/face-1.jpg" alt="" />
+          </button>
+
+          <button class="photo-card" type="button" aria-label="Open FACE second picture in full screen">
+            <img src="images/face-2.jpg" alt="" />
+          </button>
+        </div>
+
+        <div class="chapter-copy">
+          <p>How do i even describe it - <strong>IDK</strong> if i will have enough words to justify but i will give it a try</p>
+
+          <p><strong>YOURS</strong> is one of the most <strong>CUTEST</strong>, <strong>PRETTIEST</strong> and <strong>INNOCENT</strong> faces i have come accross in my life. <strong>NO OTHER FACE</strong> has ever given me <strong>ALL</strong> of those reactions at once and this is the feeling i get every single time i see <strong>YOUR FACE</strong> 😍<br>
+          Also there is a Natural Glow itself in Your Face and that is not something everyone has, <strong>EVEN</strong> without makeup you are still the most <strong>BEAUTIFUL</strong> ❤️<br>
+          I know you said no vulgar words but <strong>IDK</strong> people find other body parts as Sexy but to me ever your face feels <strong>SEXY</strong> idk how you will take it but it is how it is 🥰<br>
+          <strong>ONCE YOU ARE ALL DRESSED UP AND READY, YOU LITERALL BECOME THE GODDESS OF SEXINESS</strong> 🥵.<br>
+          <strong>PERIOD</strong></p>
+
+          <p>And before anything else let me tell you one thing <strong>YOURS</strong> is the only <strong>FACE</strong> i want to see everyday near me, after i wake and throughout my life ❤️. As i have already experienced it many times its a feeling i always wish for. Also whenever i look at you while you are Asleep- If the word <strong>INNOCENCE</strong> was <strong>HUMAN</strong> that will definitely be your face at that time 🥹. You are even more <strong>CUTER</strong> while ur asleep a literal <strong>KITTY KITTY CAT</strong> 😺</p>
+        </div>
+
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+          <button class="nav-arrow previous-chapter" type="button" aria-label="Return to YOUR FACE">←</button>
+          <span class="nav-label">Move at your own pace</span>
+        </nav>
+      </article>
+    </div>
+  </section>
+
+  <div class="lightbox"  id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close full screen image">×</button>
+    <img id="lightboxImage" src="" alt="" />
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
