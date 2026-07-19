@@ -469,20 +469,12 @@ body::after {
 
 .main-experience.show .chapter.active .photo-card:first-child {
   animation:
-    photoReveal
-    0.95s
-    0.38s
-    cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+    photoReveal 0.95s 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .main-experience.show .chapter.active .photo-card:nth-child(2) {
   animation:
-    photoReveal
-    0.95s
-    0.58s
-    cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+    photoReveal 0.95s 0.58s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .photo-card:hover {
@@ -575,11 +567,7 @@ Later chapters receive a directional entrance class through JavaScript.
 
 .chapter.active .chapter-heading {
   animation:
-    chapterHeadingReveal
-    0.85s
-    0.18s
-    cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+    chapterHeadingReveal 0.85s 0.18s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .chapter-copy {
@@ -599,10 +587,7 @@ Later chapters receive a directional entrance class through JavaScript.
 
 .chapter.active .chapter-copy p {
   animation:
-    paragraphReveal
-    0.72s
-    cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+    paragraphReveal 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .chapter.active .chapter-copy p:nth-child(1) {
@@ -681,6 +666,243 @@ Later chapters receive a directional entrance class through JavaScript.
   color: rgba(255, 255, 255, 0.72);
   font-size: 0.9rem;
   line-height: 1.4;
+}
+
+/*====================================================
+NAVIGATION INTERACTION POLISH
+Version: 1.0
+====================================================*/
+
+.nav-arrow {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    background 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+/*
+Soft inner highlight.
+*/
+.nav-arrow::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+
+  background:
+    radial-gradient(circle at 35% 25%,
+      rgba(255, 255, 255, 0.22),
+      transparent 42%);
+
+  opacity: 0.45;
+
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+}
+
+/*
+A very subtle pulse that appears when the arrow is pressed.
+*/
+.nav-arrow::after {
+  content: "";
+  position: absolute;
+  inset: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+
+  background:
+    radial-gradient(circle,
+      rgba(255, 213, 229, 0.46),
+      rgba(255, 95, 158, 0.12) 45%,
+      transparent 72%);
+
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.nav-arrow:hover {
+  border-color: rgba(255, 213, 229, 0.58);
+
+  background:
+    radial-gradient(circle at 35% 30%,
+      rgba(255, 255, 255, 0.24),
+      transparent 32%),
+    linear-gradient(145deg,
+      rgba(255, 116, 170, 0.46),
+      rgba(132, 10, 59, 0.68));
+
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.4),
+    0 0 38px rgba(255, 95, 158, 0.38);
+}
+
+.nav-arrow:hover::before {
+  opacity: 0.82;
+  transform: scale(1.08);
+}
+
+/*
+Direction-aware movement.
+*/
+.next-chapter:hover {
+  transform: translateY(-3px) translateX(4px) scale(1.045);
+}
+
+.previous-chapter:hover {
+  transform: translateY(-3px) translateX(-4px) scale(1.045);
+}
+
+/*
+Mouse click and mobile touch response.
+*/
+.nav-arrow:active,
+.nav-arrow.is-pressed {
+  transform: scale(0.92);
+  border-color: rgba(255, 213, 229, 0.72);
+
+  box-shadow:
+    0 9px 24px rgba(0, 0, 0, 0.34),
+    0 0 28px rgba(255, 95, 158, 0.48);
+}
+
+.nav-arrow.is-pressed::after {
+  animation:
+    navigationPressPulse 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/*
+The gentle invitation appears only after a chapter has settled.
+*/
+.nav-arrow.navigation-invitation {
+  animation:
+    navigationInvitationGlow 2.4s ease-in-out infinite;
+}
+
+/*
+The invitation stops immediately while the visitor interacts.
+*/
+.nav-arrow.navigation-invitation:hover,
+.nav-arrow.navigation-invitation:focus-visible,
+.nav-arrow.navigation-invitation:active {
+  animation: none;
+}
+
+/*
+Clear keyboard focus without using the browser's harsh default ring.
+*/
+.nav-arrow:focus-visible {
+  outline: none;
+
+  border-color: rgba(255, 240, 246, 0.92);
+
+  box-shadow:
+    0 0 0 4px rgba(255, 95, 158, 0.18),
+    0 16px 38px rgba(0, 0, 0, 0.38),
+    0 0 34px rgba(255, 95, 158, 0.4);
+}
+
+@keyframes navigationPressPulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  28% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3.4);
+  }
+}
+
+@keyframes navigationInvitationGlow {
+
+  0%,
+  100% {
+    box-shadow:
+      0 12px 34px rgba(0, 0, 0, 0.3),
+      0 0 24px rgba(255, 95, 158, 0.2);
+  }
+
+  50% {
+    box-shadow:
+      0 15px 40px rgba(0, 0, 0, 0.34),
+      0 0 40px rgba(255, 95, 158, 0.43);
+  }
+}
+
+/*====================================================
+MUSIC CONTROLLER SAFE AREA
+====================================================*/
+
+/*
+Ensure the final navigation row never feels crowded by the
+floating music controller.
+*/
+.main-experience {
+  padding-bottom:
+    max(118px,
+      calc(96px + env(safe-area-inset-bottom)));
+}
+
+.chapter-nav {
+  scroll-margin-bottom: 130px;
+}
+
+@media (max-width: 768px) {
+  .main-experience {
+    padding-bottom:
+      max(156px,
+        calc(136px + env(safe-area-inset-bottom)));
+  }
+
+  .chapter-nav {
+    margin-bottom: 24px;
+  }
+
+  .music-player {
+    bottom:
+      max(16px,
+        env(safe-area-inset-bottom));
+  }
+}
+
+/*
+Short landscape screens need slightly more compact controls.
+*/
+@media (orientation: landscape) and (max-height: 640px) {
+  .music-player {
+    right: 12px;
+    left: auto;
+    bottom: 10px;
+    max-width: min(360px, 62vw);
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .music-player button {
+    width: 36px;
+    height: 36px;
+  }
+
+  #musicProgress {
+    width: min(150px, 28vw);
+  }
+
+  .main-experience {
+    padding-bottom: 104px;
+  }
 }
 
 .chapter-photo-grid {
@@ -1225,6 +1447,214 @@ Later chapters receive a directional entrance class through JavaScript.
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/*====================================================
+CUSTOM HEART CURSOR
+Version: 1.0
+====================================================*/
+
+/*
+The custom cursor is activated only after JavaScript confirms
+that the device has a real mouse or accurate trackpad pointer.
+
+Touch-only phones and tablets keep their normal touch behaviour.
+*/
+@media (hover: hover) and (pointer: fine) {
+
+  html.heart-cursor-enabled,
+  html.heart-cursor-enabled body,
+  html.heart-cursor-enabled button,
+  html.heart-cursor-enabled a,
+  html.heart-cursor-enabled input,
+  html.heart-cursor-enabled label,
+  html.heart-cursor-enabled .photo-card,
+  html.heart-cursor-enabled #loveEnvelope,
+  html.heart-cursor-enabled .special-note-close,
+  html.heart-cursor-enabled .music-player,
+  html.heart-cursor-enabled .music-player * {
+    cursor: none !important;
+  }
+
+  .heart-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 28px;
+    height: 28px;
+
+    display: grid;
+    place-items: center;
+
+    pointer-events: none;
+    z-index: 100000;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+      translate3d(-50%, -50%, 0) scale(0.82);
+
+    transition:
+      opacity 0.16s ease,
+      visibility 0.16s ease,
+      transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.2s ease;
+
+    will-change: left, top, transform;
+  }
+
+  .heart-cursor.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .heart-cursor-icon {
+    display: block;
+
+    color: var(--rose);
+    font-size: 23px;
+    line-height: 1;
+
+    transform-origin: center;
+
+    text-shadow:
+      0 0 7px rgba(255, 95, 158, 0.82),
+      0 0 16px rgba(255, 95, 158, 0.38);
+
+    transition:
+      color 0.2s ease,
+      transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      text-shadow 0.2s ease;
+  }
+
+  .heart-cursor-sparkle {
+    position: absolute;
+
+    color: var(--gold);
+    font-size: 9px;
+    line-height: 1;
+
+    opacity: 0;
+    transform: scale(0.35) rotate(-15deg);
+
+    text-shadow:
+      0 0 7px rgba(255, 214, 165, 0.82);
+
+    transition:
+      opacity 0.18s ease,
+      transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .heart-cursor-sparkle-one {
+    top: -3px;
+    right: -4px;
+  }
+
+  .heart-cursor-sparkle-two {
+    bottom: -2px;
+    left: -4px;
+    transition-delay: 0.04s;
+  }
+
+  /*
+  General interactive elements:
+  buttons, links, inputs and music controls.
+  */
+  .heart-cursor.interactive {
+    transform:
+      translate3d(-50%, -50%, 0) scale(1.08);
+  }
+
+  .heart-cursor.interactive .heart-cursor-icon {
+    color: var(--rose-light);
+
+    transform: scale(1.08);
+
+    text-shadow:
+      0 0 9px rgba(255, 95, 158, 0.95),
+      0 0 22px rgba(255, 95, 158, 0.55);
+  }
+
+  /*
+  Photographs receive a gentle halo to indicate fullscreen viewing.
+  */
+  .heart-cursor.photo-hover {
+    filter:
+      drop-shadow(0 0 8px rgba(255, 95, 158, 0.7));
+  }
+
+  .heart-cursor.photo-hover .heart-cursor-icon {
+    transform: scale(1.16);
+  }
+
+  /*
+  The envelope is the most special interaction,
+  so the two small gold sparkles appear around the heart.
+  */
+  .heart-cursor.envelope-hover {
+    transform:
+      translate3d(-50%, -50%, 0) scale(1.16);
+  }
+
+  .heart-cursor.envelope-hover .heart-cursor-icon {
+    color: #ff8fba;
+
+    transform: scale(1.12);
+
+    text-shadow:
+      0 0 10px rgba(255, 95, 158, 1),
+      0 0 26px rgba(255, 95, 158, 0.62);
+  }
+
+  .heart-cursor.envelope-hover .heart-cursor-sparkle {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+
+  /*
+  Gentle tactile response while pressing a mouse button.
+  */
+  .heart-cursor.pressed {
+    transform:
+      translate3d(-50%, -50%, 0) scale(0.76);
+  }
+
+  .heart-cursor.pressed .heart-cursor-icon {
+    transform: scale(0.9);
+  }
+
+  /*
+Direction-aware cursor response over navigation arrows.
+*/
+  .heart-cursor.navigation-next {
+    transform:
+      translate3d(-43%, -50%, 0) scale(1.12);
+  }
+
+  .heart-cursor.navigation-previous {
+    transform:
+      translate3d(-57%, -50%, 0) scale(1.12);
+  }
+
+  .heart-cursor.navigation-next .heart-cursor-icon {
+    transform: translateX(3px) scale(1.1);
+  }
+
+  .heart-cursor.navigation-previous .heart-cursor-icon {
+    transform: translateX(-3px) scale(1.1);
+  }
+}
+
+/*
+Never display the custom cursor on touch-only devices.
+*/
+@media (hover: none),
+(pointer: coarse) {
+  .heart-cursor {
+    display: none !important;
   }
 }
 
